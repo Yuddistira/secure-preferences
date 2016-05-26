@@ -729,4 +729,20 @@ public class SecurePreferences implements SharedPreferences {
 				.unregisterOnSharedPreferenceChangeListener(listener);
 		//}
 	}
+
+	/**
+	 *
+	 * Added to get a values as as it can be useful to store values that are
+	 * already encrypted and encoded
+	 *
+	 * @param key
+	 * @param defaultValue
+	 * @return Unencrypted value of the key or the defaultValue if
+	 */
+	public String getUnencryptedString(String key, String defaultValue) {
+		final String nonEncryptedValue = sharedPreferences.getString(
+				SecurePreferences.hashPrefKey(key), null);
+		return (nonEncryptedValue != null) ? nonEncryptedValue : defaultValue;
+	}
+
 }
